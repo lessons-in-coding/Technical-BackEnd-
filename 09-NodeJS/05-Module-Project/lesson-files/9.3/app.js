@@ -1,5 +1,7 @@
 const fs = require('fs');
+
 const inquirer = require('inquirer');
+
 const generatePage = require('./src/page-template');
 
 const promptUser = () => {
@@ -116,6 +118,7 @@ Add a New Project
         default: false
       }
     ])
+
     .then(projectData => {
       portfolioData.projects.push(projectData);
       if (projectData.confirmAddProject) {
@@ -137,3 +140,8 @@ promptUser()
     //   console.log('Page created! Check out index.html in this directory to see it!');
     // });
   });
+
+  // This first code example collects and prints data without saving it to a file.
+
+
+  

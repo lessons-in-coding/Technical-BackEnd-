@@ -17,3 +17,4 @@ module.exports = (name, github) => {
   </html>
   `;
 };
+

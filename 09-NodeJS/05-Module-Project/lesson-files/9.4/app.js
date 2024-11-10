@@ -137,3 +137,10 @@ promptUser()
       console.log('Page created! Check out index.html in this directory to see it!');
     });
   });
+
+// The second code is similar but includes additional functionality to save the collected data to an HTML file.
+
+
+
+
+

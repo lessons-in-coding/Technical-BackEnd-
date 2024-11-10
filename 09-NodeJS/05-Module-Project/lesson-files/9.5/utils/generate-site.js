@@ -35,3 +35,11 @@ const copyFile = () => {
 };
 
 module.exports = { writeFile, copyFile };
+
+/*
+
+const writeFile = fileContent => {
+  return new Promise((resolve, reject) => {});
+};
+
+*/
