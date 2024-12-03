@@ -1,5 +1,7 @@
+//This tells the code to use Chai’s expect style to check if the function’s output matches what we expect.
 var expect = chai.expect;
 
+//	This is a setup step using Sinon to “watch” (or spy on) the indexOf method of all arrays.
 before(function() {
   sinon.spy(Array.prototype, 'indexOf');
 });

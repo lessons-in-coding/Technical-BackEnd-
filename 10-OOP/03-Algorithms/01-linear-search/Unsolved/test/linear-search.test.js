@@ -1,8 +1,12 @@
-var expect = chai.expect;
+const linearSearch = require('../linear-search');
 
-before(function() {
-  sinon.spy(Array.prototype, 'indexOf');
+beforeAll(function() {
+  jest.spyOn(Array.prototype, 'indexOf');
 });
+
+// afterAll(() => {
+//   jest.restoreAllMocks();
+// })
 
 describe('linearSearch', function() {
   it("should not call the 'indexOf' method", function() {
@@ -11,7 +15,7 @@ describe('linearSearch', function() {
 
     var result = linearSearch(arr, target);
 
-    expect(Array.prototype.indexOf.called).to.eql(false);
+    expect(Array.prototype.indexOf).not.toHaveBeenCalled();
   });
 
   it('should return 2 when given the array [8, 22, 3, 0, -2] and a target of 3', function() {
@@ -20,7 +24,7 @@ describe('linearSearch', function() {
 
     var result = linearSearch(arr, target);
 
-    expect(result).to.eql(2);
+    expect(result).toBe(2);
   });
 
   it('should return -1 when given the array [13, 5, 6] and a target of 11', function() {
@@ -29,7 +33,7 @@ describe('linearSearch', function() {
 
     var result = linearSearch(arr, target);
 
-    expect(result).to.eql(-1);
+    expect(result).toEqual(-1);
   });
 
   it('should return -1 when given the array [] and a target of 0', function() {
@@ -38,6 +42,6 @@ describe('linearSearch', function() {
 
     var result = linearSearch(arr, target);
 
-    expect(result).to.eql(-1);
+    expect(result).toEqual(-1);
   });
 });

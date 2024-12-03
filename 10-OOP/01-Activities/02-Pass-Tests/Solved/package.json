@@ -1,7 +1,6 @@
 {
   "name": "organizing-tests",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -11,7 +10,9 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "jest": "^26.6.3"
+  "keywords": [],
+  "description": "",
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }

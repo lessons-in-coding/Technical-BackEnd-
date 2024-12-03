@@ -1,4 +1,4 @@
-var expect = chai.expect;
+const isUnique = require('../is-unique');
 
 describe('isUnique', function() {
   it('should return true when given the array [2, 8, 7, 5, 4, 3]', function() {
@@ -6,7 +6,7 @@ describe('isUnique', function() {
 
     var result = isUnique(arr);
 
-    expect(result).to.eql(true);
+    expect(result).toEqual(true);
   });
 
   it('should return true when given the array []', function() {
@@ -14,7 +14,7 @@ describe('isUnique', function() {
 
     var result = isUnique(arr);
 
-    expect(result).to.eql(true);
+    expect(result).toEqual(true);
   });
 
   it('should return false when given the array [-2, 5, -2, 53, 22, 1]', function() {
@@ -22,7 +22,7 @@ describe('isUnique', function() {
 
     var result = isUnique(arr);
 
-    expect(result).to.eql(false);
+    expect(result).toEqual(false);
   });
 
   it('should return false when given the array [4, 4, 2, 9, 2, 9, 3, 3, 7, 3]', function() {
@@ -30,6 +30,6 @@ describe('isUnique', function() {
 
     var result = isUnique(arr);
 
-    expect(result).to.eql(false);
+    expect(result).toEqual(false);
   });
 });

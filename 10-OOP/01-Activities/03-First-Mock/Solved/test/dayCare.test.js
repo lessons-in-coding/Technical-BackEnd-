@@ -22,12 +22,13 @@ describe('DayCare', () => {
     });
 
     it("should not add a child over the 'ageLimit'", () => {
-      const child = new Child('Tammy', 8);
+      const child = new Child('Tammy', 8); // Over age limit
       const dayCare = new DayCare();
       // The following line of code uses the jest.spyOn method to mock and spy on the console.log method.
       const mock = jest.spyOn(console, 'log');
+     
       // Replacing console.log with an empty function allows us to spy on the values provided to console.log when the test is run.
-      mock.mockImplementation(() => {});
+      mock.mockImplementation(() => {}); // Suppress actual console.log
 
       dayCare.addChild(child);
 
@@ -108,3 +109,185 @@ describe('DayCare', () => {
     });
   });
 });
+
+
+
+
+
+
+/*
+const Child = require('./child');
+const DayCare = require('./dayCare');
+
+describe('DayCare class', () => {
+  let dayCare;
+  let child;
+
+  beforeEach(() => {
+    dayCare = new DayCare();
+    child = new Child('Alice', 5);
+  });
+
+  // Test adding a child
+  it('should add a child to the daycare', () => {
+    dayCare.addChild(child);
+    expect(dayCare.children.length).toBe(1);
+    expect(dayCare.children[0].name).toBe('Alice');
+  });
+
+  // Test adding a child when the daycare is at capacity
+  it('should not add a child if the daycare is at capacity', () => {
+    // Add 3 children to the daycare
+    dayCare.addChild(new Child('Bob', 3));
+    dayCare.addChild(new Child('Charlie', 4));
+    dayCare.addChild(new Child('David', 2));
+
+    // Try to add a 4th child
+    const newChild = new Child('Eve', 5);
+    dayCare.addChild(newChild);
+
+    // Expect the daycare not to add the 4th child
+    expect(dayCare.children.length).toBe(3);
+    expect(dayCare.children[2].name).toBe('David'); // The last valid child added
+  });
+
+  // Test rejecting a child that's too old
+  it('should not add a child over the age limit', () => {
+    const oldChild = new Child('John', 7); // Over age limit
+    dayCare.addChild(oldChild);
+    expect(dayCare.children.length).toBe(0); // No children should be added
+  });
+
+  // Test rejecting invalid child type
+  it('should throw an error if the child is not an instance of Child', () => {
+    expect(() => {
+      dayCare.addChild({});
+    }).toThrowError("Expected parameter 'child' to be an instance of Child");
+  });
+
+  // Test picking up a child
+  it('should pick up a child from daycare by name', () => {
+    dayCare.addChild(child);
+    const pickedUpChild = dayCare.pickupChild('Alice');
+    expect(pickedUpChild.name).toBe('Alice');
+    expect(dayCare.children.length).toBe(0); // After picking up, the list should be empty
+  });
+
+  // Test trying to pick up a child that doesn't exist
+  it('should return an error if the child is not found during pickup', () => {
+    dayCare.addChild(child);
+    const pickedUpChild = dayCare.pickupChild('Nonexistent');
+    expect(pickedUpChild).toBeUndefined(); // The child wasn't found
+  });
+});
+*/
+
+/*
+//Jest Spy On
+
+//1. What is jest.spyOn?
+=========================
+test('spy on console.log', () => {
+  const spy = jest.spyOn(console, 'log'); // Start spying on console.log
+  
+  console.log('Hello, world!'); // Call the function being spied on
+
+  // Verify if console.log was called
+  expect(spy).toHaveBeenCalled(); 
+  expect(spy).toHaveBeenCalledWith('Hello, world!'); // Check the arguments passed
+  
+  spy.mockRestore(); // Stop spying and restore original behavior
+});
+
+	1.	Set up the spy:
+	•	jest.spyOn(console, 'log') tells Jest to monitor calls to console.log.
+	2.	Call the function:
+	•	The actual console.log('Hello, world!') is executed.
+	3.	Test the spy:
+	•	expect(spy).toHaveBeenCalled() ensures the function was called.
+	•	expect(spy).toHaveBeenCalledWith('Hello, world!') checks the arguments passed.
+	4.	Restore original behavior:
+	•	spy.mockRestore() removes the spy and restores console.log to its original functionality.
+
+
+  //2. What is mockImplementation?
+  ================================
+
+	•	mockImplementation replaces the original function’s behavior with a mocked function.
+	•	This is helpful when you want to test how your code behaves without calling the real function.
+
+  test('mock console.log implementation', () => {
+  const mock = jest.spyOn(console, 'log'); // Spy on console.log
+  
+  mock.mockImplementation(() => {
+    console.log('Mocked implementation!'); // Replace behavior
+  });
+
+  console.log('Hello, world!'); // Call the mocked function
+
+  expect(mock).toHaveBeenCalled();
+  expect(mock).toHaveBeenCalledWith('Hello, world!');
+
+  mock.mockRestore(); // Restore original behavior
+});
+
+
+  3. What is mockRestore?
+  =======================
+
+	•	mockRestore stops mocking or spying on a function and restores its original implementation.
+	•	This is important to prevent tests from interfering with each other.
+
+  test('mock implementation with restore', () => {
+  const mock = jest.spyOn(console, 'log');
+
+  mock.mockImplementation(() => {
+    console.log('Mocked behavior!');
+  });
+
+  console.log('This is a test.'); // Calls mocked behavior
+
+  expect(mock).toHaveBeenCalled();
+  expect(mock).toHaveBeenCalledWith('This is a test.');
+
+  mock.mockRestore(); // Restore original functionality
+
+  console.log('Original behavior.'); // No mocking here
+});
+
+
+Beginner-Friendly Test Scenario
+===============================
+class Calculator {
+  add(a, b) {
+    console.log(`Adding ${a} + ${b}`);
+    return a + b;
+  }
+}
+
+module.exports = Calculator;
+
+//Test with Spy, Mock, and Restore
+-----------------------------------
+const Calculator = require('./Calculator');
+
+test('spying and mocking add method', () => {
+  const calculator = new Calculator();
+  const spy = jest.spyOn(calculator, 'add'); // Spy on the add method
+
+  // Mock the implementation
+  spy.mockImplementation((a, b) => {
+    console.log('Mocked add method');
+    return 42; // Return a fixed value
+  });
+
+  // Call the mocked method
+  const result = calculator.add(2, 3);
+
+  expect(spy).toHaveBeenCalled(); // Verify the method was called
+  expect(spy).toHaveBeenCalledWith(2, 3); // Verify arguments
+  expect(result).toBe(42); // Check mocked return value
+
+  spy.mockRestore(); // Restore original behavior
+});
+ */

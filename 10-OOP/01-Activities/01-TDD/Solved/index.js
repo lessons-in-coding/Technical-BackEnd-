@@ -2,15 +2,18 @@ const Algo = require('./algo');
 
 const algo = new Algo();
 
+
 const str1 = 'Hello World!';
 const reversed = algo.reverse(str1);
 
-console.log(str1, '->', reversed);
+console.log(str1, '->', reversed); // Hello World! -> !dlroW olleH
+
 
 const str2 = 'racecar';
 const isPalindrome = algo.isPalindrome(str2);
 
 console.log(str2, '->', isPalindrome);
+
 
 const str3 = 'once upon a time there were three little pigs';
 const capitalized = algo.capitalize(str3);
